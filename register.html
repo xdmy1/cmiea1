@@ -35,72 +35,73 @@
     <body class="dark:bg-[#1c1c1c] min-h-screen flex items-center justify-center">
         
         <div class="fixed z-9 top-0 left-0 right-0 bg-light/90 dark:bg-[#1c1c1c] backdrop-blur w-screen h-16 lg:h-20 "></div>
-    <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
+        <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
 
         
-        <div class="flex items-center justify-between gap-50 ">
+<div class="flex items-center justify-between gap-50 ">
 
-    <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
-            <a href="/index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA  </div></div> </a>
-            <div id="burger" class="w-8 lg:hidden "> <img src="assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
-         <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
-             <li><a href="/despre.html">Despre noi</a></li>
-             <li><a href="/cursuri.html">Cursuri</a></li>
-             <li><a href="/contact.html">Contacte</a></li>
-         </ul>
-    </div>
+<div class="flex justify-between gap-10 items-center w-full lg:w-auto">
+    <a href="/index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA  </div></div> </a>
+    <div id="burger" class="w-8 lg:hidden "> <img src="assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
+ <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
+     <li><a href="https://xdmy1.github.io/cmiea1/despre.html">Despre noi</a></li>
+     <li><a href="https://xdmy1.github.io/cmiea1/cursuri.html">Cursuri</a></li>
+     <li><a href="https://xdmy1.github.io/cmiea1/contact.html">Contacte</a></li>
+ </ul>
+</div>
 
-         </ul>
+ </ul>
 <div class="font-medium gap-6 hidden lg:flex items-center">
-    <div id="auth-buttons" class="flex items-center gap-4">
-        <a href="/login.html">
-            <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white">Login</button>
+<div id="auth-buttons" class="flex items-center gap-4">
+<a href="/login.html">
+    <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white">Login</button>
+</a>
+<a href="/register.html">
+    <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
+</a>
+</div>
+<div id="user-menu" class="hidden relative">
+<button id="user-menu-button" class="flex items-center gap-2 px-4 py-2 text-sur hover:text-black dark:hover:text-white">
+    <span id="user-email-display">User</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+</button>
+<div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+    <div class="py-1">
+        <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
+        <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
+    </div>
+</div>
+</div>
+<button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+<svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+<svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+</button>
+</div>
+</div>
+</nav>
+
+<nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen lg:hidden">
+<div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin"><i class="ph ph-x text-5xl"></i></div>
+<div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
+    <li><a href="https://xdmy1.github.io/cmiea1/despre.html">Despre noi</a></li>
+     <li><a href="https://xdmy1.github.io/cmiea1/cursuri.html">Cursuri</a></li>
+     <li><a href="https://xdmy1.github.io/cmiea1/contact.html">Contacte</a></li>
+    
+    <hr class="border-black my-6 w-3/4 ml-auto dark:border-white">
+    <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
+        <a href="https://xdmy1.github.io/cmiea1/login.html" class="w-full text-right">
+            <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white text-end" >Login</button>
         </a>
-        <a href="/register.html">
+        <a href="https://xdmy1.github.io/cmiea1/register.html" class="w-full text-right">
             <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
         </a>
     </div>
-    <div id="user-menu" class="hidden relative">
-        <button id="user-menu-button" class="flex items-center gap-2 px-4 py-2 text-sur hover:text-black dark:hover:text-white">
-            <span id="user-email-display">User</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
-            <div class="py-1">
-                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
-            </div>
-        </div>
-    </div>
-    <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
-        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+    <button id="theme-toggle2" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+        <svg id="theme-toggle-dark-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <svg id="theme-toggle-light-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
     </button>
 </div>
-        </div>
-    </nav>
-    <nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen ">
-        <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin"><i class="ph ph-x text-5xl"></i></div>
-        <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
-            <a href="/despre.html">Despre noi</a>
-            <a href="/cursuri.html">Cursuri</a>
-            <a href="/contact.html">Contacte</a>
-            
-            <hr class="border-black my-6 w-3/4 ml-auto">
-            <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
-                <a href="login.html" class="w-full text-right">
-                    <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white text-end" >Login</button>
-                </a>
-                <a href="register.html" class="w-full text-right">
-                    <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
-                </a>
-            </div>
-            <button id="theme-toggle2" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
-                <svg id="theme-toggle-dark-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                <svg id="theme-toggle-light-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
-            </button>
-        </div>
-    </nav>
+</nav>
         <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-md">
     <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Creează un cont</h2>
     
