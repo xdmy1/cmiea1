@@ -1,0 +1,342 @@
+{
+  "common": [
+    {
+      "question": "Unde se desfășoară cursurile? Există mai multe locații?",
+      "answer": "Cursurile CMIEA se desfășoară la sediul centrului pe strada Matei Basarab 14."
+    },
+    {
+      "question": "Cum mă înscriu într-un program (procesul de înscriere)?",
+      "answer": "Înscrierea se face fie online, prin completarea unui formular pe site-ul oficial sau pe pagina de Facebook, fie direct la sediul CMIEA. Este posibil să fie necesar un act de identitate pentru validarea înscrierii."
+    },
+    {
+      "question": "Care sunt cerințele pentru a participa la cursuri?",
+      "answer": "Nu există cerințe stricte, însă unele cursuri pot necesita cunoștințe de bază într-un anumit domeniu. De regulă, orice adult interesat poate participa."
+    },
+    {
+      "question": "Ce certificări sau acreditări pot obține?",
+      "answer": "La finalizarea unor cursuri, participanții pot primi un certificat de absolvire care atestă competențele dobândite. Tipul certificării depinde de cursul urmat."
+    }
+  ],
+  "courses": {
+      "1": [
+      {
+        "question": "Care este scopul acestui curs?",
+        "answer": "Acest curs are ca scop dezvoltarea abilităților de bază în domeniul ales, oferind o introducere clară și practică."
+      },
+      {
+        "question": "Este necesară experiență anterioară?",
+        "answer": "Nu, acest curs este destinat începătorilor și nu necesită cunoștințe prealabile."
+      }
+    ],
+    "2": [
+      {
+        "question": "Ce teme principale sunt abordate?",
+        "answer": "Cursul acoperă concepte fundamentale, aplicații practice și studii de caz relevante."
+      },
+      {
+        "question": "Se oferă materiale de studiu?",
+        "answer": "Da, participanții vor primi suport de curs și resurse suplimentare pentru aprofundare."
+      }
+    ],
+    "3": [
+      {
+        "question": "Cât durează acest curs?",
+        "answer": "Durata cursului este de aproximativ 8 săptămâni, cu sesiuni săptămânale de 2 ore."
+      },
+      {
+        "question": "Ce competențe voi dobândi?",
+        "answer": "La finalul cursului, participanții vor avea o înțelegere solidă a subiectului și vor putea aplica conceptele în practică."
+      }
+    ],
+      "4": [
+      {
+        "question": "Ce voi învăța în acest curs?",
+        "answer": "Tehnici de comunicare, incluziune socială și exerciții de dezvoltare a încrederii."
+      },
+      {
+        "question": "Cine poate participa?",
+        "answer": "Orice tânăr interesat de dezvoltarea personală și socializare."
+      }
+    ],
+    "5": [
+      {
+        "question": "Ce voi învăța în acest curs?",
+        "answer": "Stiluri parentale, tehnici de comunicare eficientă și metode de gestionare a conflictelor."
+      },
+      {
+        "question": "Acest curs este potrivit doar pentru părinți?",
+        "answer": "Nu, orice adult interesat de relațiile părinte-copil poate participa."
+      }
+    ],
+    "6": [
+      {
+        "question": "Cât durează acest curs?",
+        "answer": "Cursul durează 6 săptămâni, cu sesiuni săptămânale de 2 ore."
+      },
+      {
+        "question": "Este necesară experiență anterioară?",
+        "answer": "Nu, acest curs este destinat începătorilor."
+      }
+    ],
+    "7": [
+      {
+        "question": "Ce abilități practice voi dezvolta?",
+        "answer": "Vei învăța tehnici de gestionare a stresului și metode de relaxare."
+      },
+      {
+        "question": "Cursul include activități interactive?",
+        "answer": "Da, se folosesc exerciții practice și studii de caz."
+      }
+    ],
+    "8": [
+      {
+        "question": "Acest curs include sesiuni de mentorat?",
+        "answer": "Da, participanții beneficiază de sesiuni de mentorat personalizat."
+      },
+      {
+        "question": "Ce teme principale sunt abordate?",
+        "answer": "Se discută despre leadership, gestionarea timpului și productivitatea."
+      }
+    ],
+    "9": [
+      {
+        "question": "Ce competențe voi dobândi la finalul cursului?",
+        "answer": "Participanții vor învăța tehnici de planificare și organizare eficientă a activităților."
+      },
+      {
+        "question": "Este necesar să am cunoștințe anterioare?",
+        "answer": "Nu, acest curs este destinat atât începătorilor, cât și celor care vor să își îmbunătățească abilitățile."
+      }
+    ],
+    "10": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "11": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "12": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "13": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "14": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "15": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "16": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "17": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "18": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "19": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "20": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "21": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "22": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "23": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "24": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "25": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "26": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "27": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "28": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "29": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "30": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "31": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ],
+    "32": [
+      {
+        "question": "Cum este structurat cursul?",
+        "answer": "Cursul include atât teorie, cât și aplicații practice, pentru o învățare interactivă."
+      },
+      {
+        "question": "Ce tipuri de materiale sunt utilizate?",
+        "answer": "Se folosesc prezentări, studii de caz și exerciții practice pentru a facilita înțelegerea."
+      }
+    ]
+  }
+}

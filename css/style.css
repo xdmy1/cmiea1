@@ -1,0 +1,223 @@
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Onest';
+}
+li, button {
+    cursor: pointer;
+}
+
+@keyframes slides {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .logos {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 200%;
+    justify-content: center;
+  }
+  
+  .logos:before, .logos:after {
+    position: absolute;
+    top: 0;
+    content: '';
+    width: 250px;
+    height: 100%;
+    z-index: 2;
+  }
+  
+  .logos:before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0), rgb(255, 255, 255));
+  }
+  
+  .logos:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgb(255, 255, 255));
+  }
+  .dark .logos:before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0), rgb(28, 28, 28));
+  }
+  
+  .dark .logos:after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0), rgb(28, 28, 28));
+  }
+  
+  .logo_items {
+    display: flex;
+    gap: 5rem;
+    animation: 15s slides infinite linear;
+  }
+  
+  .logos:hover .logo_items {
+    animation-play-state: paused;
+  }
+  
+
+
+
+  
+
+  .phone-nav {
+    transform: translateX(100%); 
+    transition: transform 0.3s ease-in-out;
+  }
+  .phone-nav {
+    transform: translateX(100%); 
+    animation: slide-in 0.2s ease-in-out forwards;
+  }
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+
+
+  .eticheta {
+    padding: .5rem .7rem;
+    width: fit-content;
+    border-radius: 1.05rem;
+
+  }
+@keyframes circle {
+    0% {
+        transform: rotate(0deg)
+                  translate(-165px)
+                  rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg)
+                  translate(-165px)
+                  rotate(-360deg);
+    }
+}
+
+@keyframes circle2 {
+    0% {
+        transform: rotate(0deg)
+                  translate(-330px)
+                  rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg)
+                  translate(-330px)
+                  rotate(-360deg);
+    }
+}
+
+@keyframes circle3 {
+    0% {
+        transform: rotate(0deg)
+                  translate(-660px)
+                  rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg)
+                  translate(-660px)
+                  rotate(-360deg);
+    }
+}
+
+.card {
+
+  --bg-color: #212121;
+  background-color: var(--bg-color);
+  padding: 1rem 2rem;
+  border-radius: 1.25rem;
+}
+.loader {
+  color: rgb(124, 124, 124);
+  font-family: "Onest", sans-serif;
+  font-weight: 500;
+  font-size: 25px;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 40px;
+  padding: 10px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 8px;
+}
+
+.words {
+  overflow: hidden;
+  position: relative;
+}
+.words::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    var(--bg-color) 10%,
+    transparent 30%,
+    transparent 70%,
+    var(--bg-color) 90%
+  );
+  z-index: 20;
+}
+
+.word {
+  display: block;
+  height: 100%;
+  padding-left: 6px;
+  color: #956afa;
+  animation: spin_4991 4s infinite;
+}
+
+
+.swiper-wrapper {
+  width: 100%;
+  height: fit-content !important;
+
+  -webkit-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+  position: relative;
+  }
+  .swiper-pagination-bullet {
+  background: #4f46e5;
+  }
+
+
+.hero-despre {
+  background-image: url('/assets/about-us-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.team-slider {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+.team-slider::-webkit-scrollbar {
+  display: none; 
+}
+.slider-item {
+  min-width: 280px;
+}
+.team-img {
+  filter: grayscale(100%);
+}
+ 
+
+

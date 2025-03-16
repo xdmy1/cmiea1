@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+        <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
+        </style>    
+        <title>Trimis cu succes - CMIEA</title>
+        <link rel="icon" href="assets/icon.ico" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/style.css">
+        <style type="text/tailwindcss">
+          @theme {
+            --color-main: #3542FF;
+            --color-sur: #777878;
+          }
+        </style>
+       <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+</script>
+<script type="module" src="/js/auth-state.js" defer></script>
+<script type="module" src="../js/auth-state.js" defer></script>
+      </head>
+<body class="bg-gray-50 dark:bg-[#1c1c1c]">  
+    <div class="fixed z-9 top-0 left-0 right-0 backdrop-blur w-screen h-16 lg:h-20 "></div>
+    <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
+
+        
+        <div class="flex items-center justify-between gap-50 ">
+
+    <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
+            <a href="../index.html"><div class="font-semibold text-xl dark:text-white">CMIEA</div> </a>
+            <div id="burger" class="w-8 lg:hidden "> <img src="../assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="../assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
+         <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
+             <li><a href="pages/despre.html">Despre noi</a></li>
+             <li><a href="pages/cursuri.html">Cursuri</a></li>
+             <li><a href="pages/contact.html">Contacte</a></li>
+         </ul>
+    </div>
+
+         </ul>
+         <div class="font-medium gap-6 hidden lg:flex items-center">
+            <div id="auth-buttons" class="flex items-center gap-4">
+                <a href="../login.html">
+                    <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white">Conectare</button>
+                </a>
+                <a href="../register.html">
+                    <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Înregistrare</button>
+                </a>
+            </div>
+            <div id="user-menu" class="hidden relative">
+                <button id="user-menu-button" class="flex items-center gap-2 px-4 py-2 text-sur hover:text-black dark:hover:text-white">
+                    <span id="user-email-display">User</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                    <div class="py-1">
+                        <a href="../dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
+                        <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Deconectare</button>
+                    </div>
+                </div>
+            </div>
+            <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen ">
+        <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin"><i class="ph ph-x text-5xl"></i></div>
+        <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
+            <a href="/despre.html">Despre noi</a>
+            <a href="/cursuri.html">Cursuri</a>
+            <a href="/contact.html">Contacte</a>
+            
+            <hr class="border-black my-6 w-3/4 ml-auto">
+            <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
+                <a href="login.html" class="w-full text-right">
+                    <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white text-end" >Login</button>
+                </a>
+                <a href="register.html" class="w-full text-right">
+                    <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
+                </a>
+            </div>
+            <button id="theme-toggle2" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+                <svg id="theme-toggle-dark-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <svg id="theme-toggle-light-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    </nav>
+    <div class=" flex items-center justify-center text-center flex-col h-[85vh] w-screen gap-2 dark:text-white">
+    <p class="text-3xl font-bold">Deja am primit inscrierea ta!</p>
+    <p class="text-gray/70">Vom reveni cu detalii cat mai curand.</p>
+    <a href="/index.html">
+        <button class="bg-main px-4 py-2 text-white rounded-xl hover:cursor-pointer hover:opacity-95 mt-5 text-lg">Mergi inapoi</button>
+    </a>
+    </div>
+    <footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main rounded-t-4xl text-white">
+        <div class="flex flex-col justify-between gap-10 items-start lg:flex-row py-10">
+            <div class="flex flex-col gap-2 max-w-[350px]">
+                <a href="index.html"><p class="text-5xl font-bold">CMIEA</p></a>
+                <p>„Sprijinim educația și dezvoltarea adulților prin cursuri gratuite și programe dedicate.”</p>
+                <div class="flex gap-5 mt-2">
+                    <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/x.png" alt="x"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/instagram.png" alt="ig"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/facebook.png" alt="fb"></a>
+                </div>
+            </div>
+
+            <div class="flex gap-10 flex-col lg:flex-row">
+                <ul class="flex flex-col gap-2">
+                    <li><p class="font-bold">Platforma</p></li>
+                    <li><a href="/pages/cursuri.html">Cursuri oferite</a></li>
+                    <li><a href="">Inscriere la cursuri</a></li>
+                    <li><a href="#reviews">Evaluare si feedback</a></li>
+                </ul>
+                <ul class="flex flex-col gap-2">
+                    <li><p class="font-bold" >Despre noi</p></li>
+                    <li><a href="/pages/despre.html">Misiunea noastra</a></li>
+                    <li><a href="/pages/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+    <hr>
+
+    <div class="flex flex-col lg:flex-row gap-10 justify-between py-5">
+        <p>&copy; 2025 CMIEA</p>
+        <div class="flex flex-col lg:flex-row text-sm gap-2 lg:gap-8">
+            <a href="https://www.chisinau.md/ro/termeni-si-conditii-20914_271827.html">Termeni și Condiții </a>
+            <a href="https://www.chisinau.md/ro/politica-de-confidentialitate-20914_271825.html">Politica de Confidențialitate</a>
+            <a href="https://www.cloudflare.com/learning/privacy/what-are-cookies/">Politica privind Cookies</a>
+        </div>
+    </div>
+    </footer>
+    <script type="module" src="../js/auth-state.js"></script>
+    <script src="/js/main.js" defer></script>
+</body>
+</html>
