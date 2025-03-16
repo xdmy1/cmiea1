@@ -13,7 +13,7 @@ let allCourses = [];
 async function renderCourses() {
     try {
         if (allCourses.length === 0) {
-            const response = await fetch('../cursuri.json');
+            const response = await fetch('./cursuri.json');
             allCourses = await response.json();
         }
 

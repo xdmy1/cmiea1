@@ -25,8 +25,8 @@ async function renderCourseDetails() {
         }
 
         const [coursesResponse, faqResponse] = await Promise.all([
-            fetch('../cursuri.json'),
-            fetch('../faq.json')
+            fetch('./cursuri.json'),
+            fetch('./faq.json')
         ]);
 
         const [courses, faqData] = await Promise.all([
