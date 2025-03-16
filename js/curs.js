@@ -59,11 +59,11 @@ async function renderCourseDetails() {
             <p class="font-semibold text-4xl">${course.name}</p>
           </div>
           <div class="flex flex-wrap max-w-[400px] gap-2">
-            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="/assets/limbaAlb.png" alt=""><p class="text-white">${course.limba}</p> </div>
-            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="../assets/timpAlb.png" alt=""><p class="text-white">${course.ore} Ore</p> </div>
-            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="../assets/calendarAlb.png" alt=""><p class="text-white">${course.durata}</p> </div>
-            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="../assets/experientaAlb.png" alt=""><p class="text-white">${course.categorie}</p> </div>
-            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="../assets/locuriAlb.png" alt=""><p class="text-white">Locuri disponibile: ${course.locuri}</p> </div>
+            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="./assets/limbaAlb.png" alt=""><p class="text-white">${course.limba}</p> </div>
+            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="./assets/timpAlb.png" alt=""><p class="text-white">${course.ore} Ore</p> </div>
+            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="./assets/calendarAlb.png" alt=""><p class="text-white">${course.durata}</p> </div>
+            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="./assets/experientaAlb.png" alt=""><p class="text-white">${course.categorie}</p> </div>
+            <div class="eticheta bg-[#3542FF] flex gap-1 items-center"><img src="./assets/locuriAlb.png" alt=""><p class="text-white">Locuri disponibile: ${course.locuri}</p> </div>
           </div>
         </div>
         `;
