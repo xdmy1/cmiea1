@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error(messages.loginErrors.verifyEmail);
             }
             
-            window.location.href = '../index.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/index.html';
             
         } catch (error) {
             console.error("Eroare:", error);
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     googleSignIn?.addEventListener('click', async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            window.location.href = '../index.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/index.html';
         } catch (error) {
             console.error("Eroare la autentificarea cu Google:", error);
             alert(error.code === 'auth/popup-closed-by-user' 

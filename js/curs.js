@@ -25,8 +25,8 @@ async function renderCourseDetails() {
         }
 
         const [coursesResponse, faqResponse] = await Promise.all([
-            fetch('/cursuri.json'),
-            fetch('/faq.json')
+            fetch('../cursuri.json'),
+            fetch('../faq.json')
         ]);
 
         const [courses, faqData] = await Promise.all([
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const success = await handleEnrollment(formData, user);
                         
                         if (success) {
-                            window.location.href = formData.get('redirect') || '/pages/succes.html';
+                            window.location.href = formData.get('redirect') || 'https://xdmy1.github.io/cmiea1/succes.html';
                         }
                     } catch (error) {
                         console.error('Error:', error);

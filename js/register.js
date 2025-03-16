@@ -78,7 +78,7 @@ const firebaseConfig = {
         signupForm.appendChild(verificationMessage);
         
         setTimeout(() => {
-            window.location.href = '/login.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/login.html';
         }, 5000);
         
       } catch (error) {
@@ -116,7 +116,7 @@ const firebaseConfig = {
                 createdAt: new Date()
             });
     
-            window.location.href = '../index.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/index.html';
         } catch (error) {
             console.error("Error with Google sign up:", error);
             alert("Error signing up with Google: " + error.message);

@@ -40,7 +40,7 @@ async function loadEnrolledCourses(userId) {
             enrolledCoursesDiv.innerHTML = `
                 <div class="bg-white dark:bg-gray-800 rounded-lg p-6 text-center">
                     <p class="text-gray-600 dark:text-gray-300">Nu ești înscris la niciun curs.</p>
-                    <a href="pages/cursuri.html" class="inline-block mt-4 bg-main hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <a href="https://xdmy1.github.io/cmiea1/cursuri.html" class="inline-block mt-4 bg-main hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Vezi cursurile disponibile
                     </a>
                 </div>
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileLogoutBtn?.addEventListener('click', async () => {
         try {
             await auth.signOut();
-            window.location.href = '/login.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/login.html';
         } catch (error) {
             console.error("Error signing out:", error);
         }
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateGreeting(user);
             loadEnrolledCourses(user.uid);
         } else {
-            window.location.href = '/login.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/login.html';
         }
     });
 });

@@ -11,7 +11,7 @@ let allCourses = [];
 async function renderCourses() {
     try {
         if (allCourses.length === 0) {
-            const response = await fetch('/cursuri.json');
+            const response = await fetch('../cursuri.json');
             allCourses = await response.json();
         }
 
@@ -22,7 +22,7 @@ async function renderCourses() {
 
         filteredCourses.forEach(course => {
             const courseElement = `
-            <a href=/curs.html?id=${course.id}>
+            <a href=https://xdmy1.github.io/cmiea1/curs.html?id=${course.id}>
                 <div class="grid grid-cols-1 gap-4 p-5 border border-black/30 dark:border-white/50 rounded-xl h-full hover:bg-black/10 dark:hover:bg-gray-100/10">
                     <div class="flex justify-start items-center gap-2 font-medium ">
                         <div><img src="${course.image}" class="max-w-fit" alt="Course"></div>

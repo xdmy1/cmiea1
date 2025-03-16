@@ -38,7 +38,7 @@ function updateUIForAuthState(user) {
                 mobileUserMenu.id = 'mobile-user-menu';
                 mobileUserMenu.className = 'flex flex-col items-center gap-5';
                 mobileUserMenu.innerHTML = `
-                    <a href="dashboard.html" class="w-full text-center">
+                    <a href="https://xdmy1.github.io/cmiea1/dashboard.html" class="w-full text-center">
                         <button class="px-4 py-2 text-black text-2xl hover:text-black dark:text-white">Dashboard</button>
                     </a>
                     <button id="mobile-logout-btn" class="w-full text-center p-2 text-main text-2xl dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">
@@ -49,7 +49,7 @@ function updateUIForAuthState(user) {
                 
                 document.getElementById('mobile-logout-btn')?.addEventListener('click', () => {
                     signOut(auth).then(() => {
-                        window.location.href = '/login.html';
+                        window.location.href = 'https://xdmy1.github.io/cmiea1/login.html';
                     });
                 });
             }
@@ -71,7 +71,7 @@ onAuthStateChanged(auth, (user) => {
         window.location.pathname.includes('profile.html') ||
         window.location.pathname.includes('my-courses.html')
     )) {
-        window.location.href = '/login.html';
+        window.location.href = 'https://xdmy1.github.io/cmiea1/login.html';
     }
 });
 
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutBtn?.addEventListener('click', () => {
         signOut(auth).then(() => {
-            window.location.href = '/login.html';
+            window.location.href = 'https://xdmy1.github.io/cmiea1/login.html';
         }).catch((error) => {
             console.error('Error signing out:', error);
         });
