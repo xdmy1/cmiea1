@@ -31,7 +31,7 @@ async function renderCourses() {
 
         paginatedCourses.forEach(course => {
             const courseElement = `
-            <a href="/curs.html?id=${course.id}">
+            <a href=https://xdmy1.github.io/cmiea1/curs.html?id=${course.id}>
                 <div class="grid grid-cols-1 gap-4 p-5 dark:bg-dark2  dark:border-white/50 rounded-2xl h-full z-10 hover:bg-black/10 dark:hover:bg-gray-100/10 bg-white duration-200 shadow-xl ">
                     <div class="flex justify-start items-center gap-2 font-medium ">
                         <div><img src="${course.image}" class="max-w-fit" alt="Course"></div>
@@ -265,7 +265,7 @@ function handleSearch(event) {
     
     if (filteredCourses.length > 0) {
         searchDropdown.innerHTML = filteredCourses.map(course => `
-            <a href="/curs.html?id=${course.id}" class="block">
+            <a href=https://xdmy1.github.io/cmiea1/curs.html?id=${course.id}> class="block">
                 <div class="p-4 hover:bg-black/10 dark:hover:bg-gray-100/10 cursor-pointer ">
                     <div class="flex items-center gap-2">
                         <img src="${course.image}" class="w-[30px] h-[30px]" alt="Course">
