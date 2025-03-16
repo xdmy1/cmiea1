@@ -34,21 +34,21 @@ async function renderCourses() {
                     <div class="flex justify-between text-xs dark:text-white/70">
                         <div class="flex flex-col gap-1">
                             <div class="flex gap-1 items-center">
-                                <img src="/assets/timp.png" alt="Time">
+                                <img src="./assets/timp.png" alt="Time">
                                 <p class="lg:text-md 2xl:text-lg">${course.ore} ore</p>
                             </div>
                             <div class="flex gap-1 items-center">
-                                <img src="/assets/calendar.png" alt="Calendar">
+                                <img src="./assets/calendar.png" alt="Calendar">
                                 <p class="lg:text-md 2xl:text-lg">${course.perioada}</p>
                             </div>
                         </div>
                         <div class="flex flex-col gap-1">
                             <div class="flex gap-1 items-center">
-                                <img src="/assets/locuri.png" alt="Spots">
+                                <img src="./assets/locuri.png" alt="Spots">
                                 <p class="lg:text-md 2xl:text-lg">${course.locuri} locuri</p>
                             </div>
                             <div class="flex gap-1 items-center">
-                                <img src="/assets/experienta.png" alt="Experience">
+                                <img src="./assets/experienta.png" alt="Experience">
                                 <p class="lg:text-md 2xl:text-lg">${course.categorie}</p>
                             </div>
                         </div>
