@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <style type="text/tailwindcss">
     @custom-variant dark (&:where(.dark, .dark *));
     </style>
@@ -17,12 +18,20 @@
       @theme {
         --color-main: #3542FF;
         --color-sur: #777878;
+        --color-maindark:#4954eb;
+        --color-sur2: #9B9FA9;
+        --color-dark: #1c1c1c;
+        --color-dark2: #272727;
+        --color-dark3: #3A3A3A;
       }
     </style>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
     import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 </script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
   </head>
 
 <body class="dark:bg-[#1c1c1c] dark:text-white">
@@ -30,15 +39,16 @@
     <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
 
         
-        <div class="flex items-center justify-between gap-50 ">
+        <div class="flex items-center justify-between">
 
     <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
             <a href="/index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA  </div></div> </a>
             <div id="burger" class="w-8 lg:hidden "> <img src="assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
          <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
              <li><a href="/despre.html">Despre noi</a></li>
-             <li><a href="/cursuri.html">Cursuri</a></li>
+             <li><a href="/cursuri.html" class="text-main font-semibold">Cursuri</a></li>
              <li><a href="/contact.html">Contacte</a></li>
+             <li><a href="/evenimente.html">Evenimente</a></li>
          </ul>
     </div>
 
@@ -57,10 +67,11 @@
             <span id="user-email-display">User</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
-        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2">
             <div class="py-1">
-                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
+                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
+                <a id="admin-link" href="/admin.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Admin Panel</a>
+                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
             </div>
         </div>
     </div>
@@ -73,101 +84,47 @@
     </nav>
 
   <nav id="phone-nav" class="phone-nav hidden fixed z-12 top-0 bg-sur h-screen w-screen lg:hidden">
-    <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl">X</div>
-    <div class="h-full w-full text-main bg-white/90 font-bold dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end justify-end text-5xl gap-5">
+    <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl"><i class="ph ph-x text-5xl"></i></div>
+    <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
         <a href="/despre.html">Despre noi</a>
-        <a href="/cursuri.html">Cursuri</a>
+        <a href="/cursuri.html" class="text-main font-semibold">Cursuri</a>
         <a href="/contact.html">Contacte</a>
+        <a href="/evenimente.html">Evenimente</a>
+        <hr class="border-black my-6 w-3/4 ml-auto dark:border-white">
+        <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
+            <a href="login.html" class="w-full text-right">
+                <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white text-end" >Login</button>
+            </a>
+            <a href="register.html" class="w-full text-right">
+                <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
+            </a>
+        </div>
         <button id="theme-toggle2" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
             <svg id="theme-toggle-dark-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
             <svg id="theme-toggle-light-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
         </button>
     </div>
 </nav>
-<div class="mt-32 p-4 lg:px-32 xl:px-64 flex flex-col justify-between gap-10 md:flex-row min-h-[50vh]">
-    <div id="course-details-container" >
-      <div class="flex flex-col lg:flex-row items-center lg:justify-between">
-      
-      </div>
-    </div>
-    <div>
-      <form action="https://api.web3forms.com/submit" method="POST" class="w-full  bg-white dark:bg-[#1c1c1c] border border-gray-100 dark:border-gray-700 rounded-3xl shadow-lg p-6 pt-6 pb-6 mx-auto lg:max-w-[400px] sm:max-w-full" id="form">
-        <h1 class="text-black text-xl md:text-2xl font-semibold  mb-4 text-left dark:text-white w-fit">Înregistrează-te acum la curs!</h1>
 
-        <input type="hidden" name="redirect" value="https://xdmy1.github.io/succes.html ">
-        <input type="hidden" id="numeCurs" name="Nume Curs" value="">
-        <input  type="hidden" name="access_key" value="d2ea775a-2d42-4a7c-83ff-6f78358eef87">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-3 mb-4">
-          <div>
-            <input required name="Numele" type="text" placeholder="Numele" class="dark:placeholder-white/90 dark:bg-[#1c1c1c] w-full px-3 py-2.5 rounded-lg b  text-gray-800 dark:text-gray-100 border-gray-200 dark:border-gray-700 border-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-          </div>
-          <div>
-            <input required name="Prenumele" type="text" placeholder="Prenumele" class="w-full dark:placeholder-white/90 dark:bg-[#1c1c1c] px-3 py-2.5 rounded-lg bg-white  text-gray-800  dark:text-gray-100 border-gray-200 dark:border-gray-700 border-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-          </div>
+<!-- Updated Hero Section to match evenimente.html style -->
+<div class="mt-32 p-4 lg:px-32 xl:px-64 flex w-full gap-10 md:flex-row min-h-[50vh]">
+    <div id="course-details-container" class="w-full">
+        <!-- Course details will be loaded dynamically from curs.js -->
+        <div class="flex justify-center items-center p-10">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-main"></div>
         </div>
-        
-        <div class="mb-4">
-          <input required name="Email" type="email" placeholder="cmiea@gmail.com" class="w-full dark:placeholder-white/90 dark:bg-[#1c1c1c] px-3 py-2.5 rounded-lg bg-white  text-gray-800  dark:text-gray-100 border-gray-200 dark:border-gray-700 border-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-        </div>
-        
-        <div class="mb-4">
-          <input required name="Telefon" type="tel" placeholder="+373" class="w-full dark:placeholder-white/90 dark:bg-[#1c1c1c] px-3 py-2.5 rounded-lg bg-white  text-gray-800  dark:text-gray-100  border-gray-200 dark:border-gray-700 border-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-        </div>
-        <div class="mb-4 relative">
-          <div class="relative">
-            <input required name="Data nasterii" type="date" placeholder="01.01.2003" class="w-full dark:placeholder-white/90 dark:bg-[#1c1c1c] px-3 py-2.5 rounded-lg bg-white  text-gray-800  dark:text-gray-100 border-gray-200 dark:border-gray-700 border-1 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm  appearance-none">
-            
-          </div>
-        </div>
-        <div class="mb-4 relative">
-          <div class="relative">
-            <select name="Ocupatia" class="w-full dark:placeholder-white/90 dark:bg-[#1c1c1c] px-3 py-2.5 rounded-lg bg-white  text-gray-800  dark:text-gray-100 appearance-none focus:outline-none border-gray-200 dark:border-gray-700 border-1 focus:ring-2 focus:ring-blue-500 text-sm pr-8">
-              <option value="" disabled selected>Ocupația</option>
-              <option value="student">Student</option>
-              <option value="angajat">Angajat</option>
-              <option value="freelancer">Freelancer</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
-              <img src="../assets/down.png" alt="dropdown" class="h-4 w-4 dark:hidden">
-              <img src="../assets/down-alb.svg" alt="dropdown" class="h-4 w-4 hidden dark:block">
-            </div>
-          </div>
-        </div>
-        
-        <div class="mb-4 relative">
-          <div class="relative">
-            <select name="Studii" class="w-full dark:placeholder-white/90 dark:bg-[#1c1c1c] px-3 py-2.5 rounded-lg bg-white  text-gray-800  dark:text-gray-100 appearance-none border-gray-200 dark:border-gray-700 border-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm pr-8">
-              <option value="" disabled selected>Studii</option>
-              <option value="liceu">Liceu</option>
-              <option value="licenta">Licență</option>
-              <option value="master">Master</option>
-              <option value="doctorat">Doctorat</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3">
-              <img src="../assets/down.png" alt="dropdown" class="h-4 w-4 dark:hidden">
-              <img src="../assets/down-alb.svg" alt="dropdown" class="h-4 w-4 hidden dark:block">
-            </div>
-          </div>
-        </div>
-        
-
-        <button type="submit" class="w-full py-3 px-4 rounded-lg text-white transition-all duration-200 text-sm bg-gray-400 cursor-not-allowed" disabled>
-    Inregistrează-mă
-</button>
-      </form>
     </div>
-    
 </div>
-</div>
+
 <section class="p-4 lg:px-32 xl:px-64 mt-10">
-  <div class="mx-auto w-full max-w-7xl py-4">
+  <div class=" w-full  py-4">
     <h2 class="mb-6 text-3xl font-bold normal-case md:text-4xl font-satoshi tracking-wide">Ce vei <span class="text-main">învăța?</span></h2>
-    <div id="learn-section" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div id="learn-section" class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
     </div>
   </div>
 </section>
 <section class="p-4 lg:px-32 xl:px-64 mt-4">
-  <div class="mx-auto w-full max-w-7xl py-4">
+  <div class="mx-auto w-full py-4">
     <div class="mt-10">
       <div class="flex justify-between items-center mb-8">
         <h2 class="text-4xl font-bold normal-case md:text-4xl font-satoshi tracking-wide">
@@ -177,7 +134,7 @@
       <div class="rounded-2xl shadow-xl overflow-hidden">
         <div class="hidden md:block">
           <table class="w-full text-center">
-            <thead class="bg-main text-white">
+            <thead class="bg-main dark:bg-maindark text-white">
               <tr>
                 <th class="py-3 px-4 font-semibold">Luni</th>
                 <th class="py-3 px-4 font-semibold">Marți</th>
@@ -205,16 +162,16 @@
 <section>
 <section>
 <section class="p-4 lg:px-32 xl:px-64 mt-16">
-  <div class="mx-auto w-full max-w-7xl" data-aos="fade-up" data-aos-duration="900">
+  <div class="mx-auto w-full" data-aos="fade-up" data-aos-duration="900">
     <div id="faq-container" class="flex flex-col gap-y-12 md:grid md:grid-flow-row md:grid-cols-2 md:gap-8 lg:grid-cols-[0.8fr_1fr]">
     </div>
   </div>
 </section>
-<footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main rounded-t-4xl text-white">
+<footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main dark:bg-maindark rounded-t-4xl text-white">
   <div class="flex flex-col justify-between gap-10 items-start lg:flex-row py-10">
       <div class="flex flex-col gap-2 max-w-[350px]">
           <a href="index.html"><p class="text-5xl font-bold">CMIEA</p></a>
-          <p>„Sprijinim educația și dezvoltarea adulților prin cursuri gratuite și programe dedicate.”</p>
+          <p>„Sprijinim educația și dezvoltarea adulților prin cursuri gratuite și programe dedicate."</p>
           <div class="flex gap-5 mt-2">
               <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="../assets/x.png" alt="x"></a>
               <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="../assets/instagram.png" alt="ig"></a>
@@ -225,14 +182,14 @@
       <div class="flex gap-10 flex-col lg:flex-row">
           <ul class="flex flex-col gap-2">
               <li><p class="font-bold">Platforma</p></li>
-              <li><a href="/cmiea/pages/cursuri.html">Cursuri oferite</a></li>
-              <li><a href="">Inscriere la cursuri</a></li>
-              <li><a href="#reviews">Evaluare si feedback</a></li>
+              <li><a href="/cursuri.html">Cursuri oferite</a></li>
+              <li><a href="">Înscriere la cursuri</a></li>
+              <li><a href="#reviews">Evaluare și feedback</a></li>
           </ul>
           <ul class="flex flex-col gap-2">
               <li><p class="font-bold" >Despre noi</p></li>
-              <li><a href="/cmiea/pages/despre.html">Misiunea noastra</a></li>
-              <li><a href="/cmiea/pages/contact.html">Contact</a></li>
+              <li><a href="/despre.html">Misiunea noastra</a></li>
+              <li><a href="/contact.html">Contact</a></li>
           </ul>
       </div>
   </div>

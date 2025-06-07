@@ -49,6 +49,7 @@
              <li><a href="pages/despre.html">Despre noi</a></li>
              <li><a href="pages/cursuri.html">Cursuri</a></li>
              <li><a href="pages/contact.html">Contacte</a></li>
+             <li><a href="pages/evenimente.html">Evenimente</a></li>
          </ul>
     </div>
 
@@ -67,12 +68,12 @@
                     <span id="user-email-display">User</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
-                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
-                    <div class="py-1">
-                        <a href="../dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-                        <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Deconectare</button>
-                    </div>
-                </div>
+                <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2 ">
+            <div class="py-1">
+                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
+                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
+            </div>
+        </div>
             </div>
             <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
                 <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -87,7 +88,7 @@
             <a href="/despre.html">Despre noi</a>
             <a href="/cursuri.html">Cursuri</a>
             <a href="/contact.html">Contacte</a>
-            
+            <a href="/evenimente.html">Evenimente</a>
             <hr class="border-black my-6 w-3/4 ml-auto">
             <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
                 <a href="login.html" class="w-full text-right">
@@ -107,10 +108,10 @@
     <p class="text-3xl font-bold">Deja am primit inscrierea ta!</p>
     <p class="text-gray/70">Vom reveni cu detalii cat mai curand.</p>
     <a href="/index.html">
-        <button class="bg-main px-4 py-2 text-white rounded-xl hover:cursor-pointer hover:opacity-95 mt-5 text-lg">Mergi inapoi</button>
+        <button class="bg-main dark:bg-maindark px-4 py-2 text-white rounded-xl hover:cursor-pointer hover:opacity-95 mt-5 text-lg">Mergi inapoi</button>
     </a>
     </div>
-    <footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main rounded-t-4xl text-white">
+    <footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main dark:bg-maindark rounded-t-4xl text-white">
         <div class="flex flex-col justify-between gap-10 items-start lg:flex-row py-10">
             <div class="flex flex-col gap-2 max-w-[350px]">
                 <a href="index.html"><p class="text-5xl font-bold">CMIEA</p></a>

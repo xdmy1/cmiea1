@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+    </style>    
+    <title>Evenimente - CMIEA</title>
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style type="text/tailwindcss">
+      @theme {
+        --color-main: #3542FF;
+        --color-light: #f9f9f9;
+        --color-maindark:#4954eb;
+        --color-sur: #777878;
+        --color-sur2: #9B9FA9;
+        --color-dark: #1c1c1c;
+        --color-dark2: #272727;
+        --color-dark3: #3A3A3A;
+      }
+    </style>
+   <script>
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    </script>
+</head>
+<body class="overflow-x-hidden bg-light dark:bg-[#1c1c1c] ">
+    <div class="fixed z-9 top-0 left-0 right-0 bg-light/90 dark:bg-[#1c1c1c] backdrop-blur w-screen h-16 lg:h-20 "></div>
+    <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
+        <div class="flex items-center justify-between">
+            <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
+                <a href="/index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA  </div></div> </a>
+                <div id="burger" class="w-8 lg:hidden "> <img src="assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
+                <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
+                    <li><a href="/despre.html">Despre noi</a></li>
+                    <li><a href="/cursuri.html">Cursuri</a></li>
+                    <li><a href="/contact.html">Contacte</a></li>
+                    <li><a href="/evenimente.html" class="text-main dark:text-maindark font-semibold">Evenimente</a></li>
+                </ul>
+            </div>
+            <div class="font-medium gap-6 hidden lg:flex items-center">
+                <div id="auth-buttons" class="flex items-center gap-4">
+                    <a href="/login.html">
+                        <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white">Login</button>
+                    </a>
+                    <a href="/register.html">
+                        <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
+                    </a>
+                </div>
+                <div id="user-menu" class="hidden relative">
+                    <button id="user-menu-button" class="flex items-center gap-2 px-4 py-2 text-sur hover:text-black dark:hover:text-white">
+                        <span id="user-email-display">User</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2 ">
+                        <div class="py-1">
+                            <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
+                            <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
+                        </div>
+                    </div>
+                </div>
+                <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen lg:hidden">
+        <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin"><i class="ph ph-x text-5xl"></i></div>
+        <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
+            <a href="/despre.html">Despre noi</a>
+            <a href="/cursuri.html">Cursuri</a>
+            <a href="/contact.html">Contacte</a>
+            <a href="/evenimente.html" class="text-main dark:text-maindark font-semibold">Evenimente</a>
+            
+            <hr class="border-black my-6 w-3/4 ml-auto dark:border-white">
+            <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
+                <a href="login.html" class="w-full text-right">
+                    <button class="px-4 py-2 text-sur hover:text-black dark:hover:text-white text-end" >Login</button>
+                </a>
+                <a href="register.html" class="w-full text-right">
+                    <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
+                </a>
+            </div>
+            <button id="theme-toggle2" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
+                <svg id="theme-toggle-dark-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                <svg id="theme-toggle-light-icon2" class="hidden w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    
+
+    <!-- Hero Section - Featured Event -->
+    <section class="px-4 lg:px-32 xl:px-64 mt-12 dark:text-white mt-24">
+        <div id="featured-event-container" class="w-full">
+            <!-- Featured event will be loaded here -->
+        </div>
+    </section>
+
+    <!-- Events Filter Section -->
+    <section class="px-4 lg:px-32 xl:px-64 mt-16">
+        <div class="flex flex-col md:flex-col justify-between items-start md:items-start gap-4 mb-8">
+            <div class="flex flex-col sm:flex-row w-full justify-between items-center">
+                <div class="flex flex-col">
+                    <h2 class="text-3xl lg:text-5xl font-semibold dark:text-white">
+                        Alte Evenimente
+                    </h2>
+                    <p class="text-sur dark:text-white/70 mt-2">Descoperă mai multe oportunități de învățare</p>
+                </div>
+                <div class="flex flex-row gap-1 sm:gap-2 py-1 sm:py-2 text-main border border-main rounded-full px-2 sm:px-4 md:px-6 w-fit h-fit items-center justify-center font-medium dark:border-maindark dark:text-maindark dark:bg-dark2">
+                    <i class="ph ph-map-pin text-sm sm:text-base md:text-xl"></i>
+                    <p class="text-xs sm:text-sm md:text-base lg:text-lg whitespace-normal sm:whitespace-nowrap max-w-[200px] sm:max-w-none text-center">
+                        Toate evenimentele au loc la 
+                        <span class="underline underline-offset-1">oficiul Cmiea</span>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Event Filters -->
+            <div class="bg-white dark:bg-dark2 rounded-xl px-4 py-4 w-full flex flex-col sm:flex-row justify-between gap-4">
+                <select id="categoryFilter" class="px-4 py-2 rounded-lg bg-white dark:bg-dark2 text-gray-700 dark:text-white">
+                    <option value="">Toate categoriile</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Conferință">Conferință</option>
+                    <option value="Training">Training</option>
+                </select>
+                
+                <select id="statusFilter" class="px-4 py-2 rounded-lg bg-white dark:bg-dark2  text-gray-700 dark:text-white">
+                    <option value="">Toate statusurile</option>
+                    <option value="upcoming">Viitoare</option>
+                    <option value="ongoing">În desfășurare</option>
+                    <option value="past">Trecute</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Events Grid -->
+    <section class="px-4 lg:px-32 xl:px-64">
+        <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Other events will be loaded here -->
+        </div>
+        
+        <!-- No Events Message -->
+        <div id="no-events-message" class="hidden text-center py-12">
+            <div class="bg-white dark:bg-dark2 rounded-xl p-8 shadow-lg">
+                <i class="ph ph-calendar-x text-6xl text-gray-400 dark:text-gray-600 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-700 dark:text-white mb-2">Nu există evenimente disponibile</h3>
+                <p class="text-gray-500 dark:text-gray-400">Verifică din nou mai târziu pentru evenimente noi!</p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Footer -->
+    <footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main dark:bg-maindark rounded-t-4xl text-white">
+        <div class="flex flex-col justify-between gap-10 items-start lg:flex-row py-10">
+            <div class="flex flex-col gap-2 max-w-[350px]">
+                <a href="index.html"><p class="text-5xl font-bold">CMIEA</p></a>
+                <p>„Sprijinim educația și dezvoltarea adulților prin cursuri gratuite și programe dedicate."</p>
+                <div class="flex gap-5 mt-2">
+                    <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/x.png" alt="x"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/instagram.png" alt="ig"></a>
+                    <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/facebook.png" alt="fb"></a>
+                </div>
+            </div>
+
+            <div class="flex gap-10 flex-col lg:flex-row">
+                <ul class="flex flex-col gap-2">
+                    <li><p class="font-bold">Platforma</p></li>
+                    <li><a href="/cursuri.html">Cursuri oferite</a></li>
+                    <li><a href="/evenimente.html">Evenimente</a></li>
+                    <li><a href="">Inscriere la cursuri</a></li>
+                    <li><a href="#reviews">Evaluare si feedback</a></li>
+                </ul>
+                <ul class="flex flex-col gap-2">
+                    <li><p class="font-bold" >Despre noi</p></li>
+                    <li><a href="/despre.html">Misiunea noastra</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="flex flex-col lg:flex-row gap-10 justify-between py-5">
+            <p>&copy; 2025 CMIEA</p>
+            <div class="flex flex-col lg:flex-row text-sm gap-2 lg:gap-8">
+                <a href="https://www.chisinau.md/ro/termeni-si-conditii-20914_271827.html">Termeni și Condiții </a>
+                <a href="https://www.chisinau.md/ro/politica-de-confidentialitate-20914_271825.html">Politica de Confidențialitate</a>
+                <a href="https://www.cloudflare.com/learning/privacy/what-are-cookies/">Politica privind Cookies</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Registration Success Modal -->
+    <div id="registration-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-dark2 rounded-lg shadow-xl p-6 m-4 max-w-sm w-full transform transition-all">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900">
+                    <svg class="h-8 w-8 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+            </div>
+            <h3 class="text-lg font-medium text-center text-gray-900 dark:text-white mb-2">Înregistrare realizată cu succes!</h3>
+            <p class="text-sm text-center text-gray-600 dark:text-gray-300 mb-6">
+                Te-ai înregistrat cu succes la eveniment. Vei primi mai multe detalii pe email.
+            </p>
+            <div class="flex justify-center">
+                <button id="close-modal" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700">
+                   Perfect!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js" type="module"></script>
+    <script type="module" src="js/auth-state.js"></script>
+    <script src="js/evenimente.js"></script>
+</body>
+</html>

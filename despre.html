@@ -17,7 +17,13 @@
     <style type="text/tailwindcss">
       @theme {
         --color-main: #3542FF;
+        --color-light: #f9f9f9;
+        --color-maindark:#4954eb;
         --color-sur: #777878;
+        --color-sur2: #9B9FA9;
+        --color-dark: #1c1c1c;
+        --color-dark2: #272727;
+        --color-dark3: #3A3A3A;
       }
     </style>
 <script type="module">
@@ -31,15 +37,16 @@
     <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
 
         
-        <div class="flex items-center justify-between gap-50 ">
+        <div class="flex items-center justify-between ">
 
     <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
             <a href="/index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA  </div></div> </a>
             <div id="burger" class="w-8 lg:hidden "> <img src="assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
          <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
-             <li><a href="/despre.html">Despre noi</a></li>
+             <li><a href="/despre.html" class="text-main font-semibold">Despre noi</a></li>
              <li><a href="/cursuri.html">Cursuri</a></li>
              <li><a href="/contact.html">Contacte</a></li>
+             <li><a href="/evenimente.html">Evenimente</a></li>
          </ul>
     </div>
 
@@ -58,10 +65,10 @@
             <span id="user-email-display">User</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
-        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2 ">
             <div class="py-1">
-                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
+                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
+                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
             </div>
         </div>
     </div>
@@ -76,10 +83,10 @@
     <nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen lg:hidden top-0">
         <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin">X</div>
         <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
-            <a href="/despre.html">Despre noi</a>
+            <a href="/despre.html" class="text-main font-semibold">Despre noi</a>
             <a href="/cursuri.html">Cursuri</a>
             <a href="/contact.html">Contacte</a>
-            
+            <a href="/evenimente.html">Evenimente</a>
             <hr class="border-black my-6 w-3/4 ml-auto dark:border-white">
             <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
                 <a href="login.html" class="w-full text-right">
@@ -113,11 +120,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team1.jpg"  alt="Camila Wilson" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team1.jpg"  alt="Gheorghe Timoftică" class="w-full h-full object-cover object-center ">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Camila Wilson</h3>
-                          <p class="text-gray-600 dark:text-gray-300">Payment Gateway Support</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Gheorghe Timoftică</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Formator</p>
                         </div>
                       </div>
                     </div>
@@ -125,11 +132,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team2.jpg"  alt="Olive Nacelle" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team2.jpg"  alt="Daniela Muncă-Aftenev" class="w-full h-full object-cover object-center ">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Olive Nacelle</h3>
-                          <p class="text-gray-600 dark:text-gray-300">VP of Customer Success</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Daniela Muncă-Aftenev</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Șef Adjunct DGETS</p>
                         </div>
                       </div>
                     </div>
@@ -137,11 +144,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team3.jpg" alt="Sophie Chamberlain" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team3.jpg" alt="Natalia Zaiaț" class="w-full h-full object-cover object-center">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Sophie Chamberlain</h3>
-                          <p class="text-gray-600 dark:text-gray-300">Specialized Support</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Natalia Zaiaț</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Echipa Managerială</p>
                         </div>
                       </div>
                     </div>
@@ -149,11 +156,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team4.jpg" alt="Jessica Dobrev" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team4.jpg" alt="Olga Jumbei" class="w-full h-full object-cover object-center ">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Jessica Dobrev</h3>
-                          <p class="text-gray-600 dark:text-gray-300">Payments Support</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Olga Jumbei</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Formator</p>
                         </div>
                       </div>
                     </div>
@@ -161,11 +168,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team5.jpg"  alt="Orlando Diggs" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team5.jpg"  alt="Aliona Novițchi" class="w-full h-full object-cover object-center ">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Orlando Diggs</h3>
-                          <p class="text-gray-600 dark:text-gray-300">Customer Success Lead</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Aliona Novițchi</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Formator</p>
                         </div>
                       </div>
                     </div>
@@ -173,11 +180,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team1.jpg"  alt="Camila Wilson" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team1.jpg"  alt="Gheorghe Timoftică" class="w-full h-full object-cover object-center ">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Camila Wilson</h3>
-                          <p class="text-gray-600 dark:text-gray-300">Payment Gateway Support</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Gheorghe Timoftică</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Formator</p>
                         </div>
                       </div>
                     </div>
@@ -185,11 +192,11 @@
                     <div class="slider-item max-w-45 flex-shrink-0 px-2">
                       <div class="bg-white dark:bg-gray-800 shadow-md">
                         <div class="aspect-[4/5] overflow-hidden">
-                          <img src="assets/team2.jpg" alt="Olive Nacelle" class="w-full h-full object-cover object-center team-img">
+                          <img src="assets/team2.jpg" alt="Daniela Muncă-Aftenev" class="w-full h-full object-cover object-center ">
                         </div>
                         <div class="p-4">
-                          <h3 class="text-lg font-semibold dark:text-white">Olive Nacelle</h3>
-                          <p class="text-gray-600 dark:text-gray-300">VP of Customer Success</p>
+                          <h3 class="text-lg font-semibold dark:text-white">Daniela Muncă-Aftenev</h3>
+                          <p class="text-gray-600 dark:text-gray-300">Șef Adjunct DGETS</p>
                         </div>
                       </div>
                     </div>
@@ -217,9 +224,8 @@
             <p class="italic text-sur md:text-center">CMIEA este locul unde pasiunea și inovația se întâlnesc. Am pornit cu o viziune clară și am construit o echipă dedicată excelenței. Prin muncă, creativitate și perseverență, reușim să oferim soluții care fac diferența.</p>
     
             <div class="mt-10 flex flex-col items-center gap-">
-                <img src="assets/recenzie1.jpg" class="w-10 mb-1 rounded-full" alt="">
-                <p class="text-center m-0">Amelie Laurent</p>
-                <p class="text-center text-xs m-0 text-sur underline">CTO, Babasha</p>
+                <p class="text-center m-0">Daniela Muncă-Aftenev</p>
+                <p class="text-center text-xs m-0 text-sur underline">Sef Adjunct DGETS</p>
             </div>
         </div>
        </section>
@@ -266,7 +272,7 @@
 </footer>
 </main>
 
-<script src="js/main.js" defer></script>
+<script src="js/main.js" type="module"></script>
 <script src="js/team.js" defer></script>
 </body>
 </html>

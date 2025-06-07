@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Înregistrare - CMIEA</title>
+    <title>Finalizare Înregistrare - CMIEA</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
     @custom-variant dark (&:where(.dark, .dark *));
@@ -14,8 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style type="text/tailwindcss">
-      @theme {
-        --color-main: #3542FF;
+        @theme {
+          --color-main: #3542FF;
         --color-light: #f9f9f9;
         --color-maindark:#4954eb;
         --color-sur: #777878;
@@ -23,8 +23,8 @@
         --color-dark: #1c1c1c;
         --color-dark2: #272727;
         --color-dark3: #3A3A3A;
-      }
-    </style>
+        }
+      </style>
    <script>
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
@@ -32,7 +32,7 @@
         document.documentElement.classList.remove('dark');
     }
     </script>
-  <script type="module" src="js/register.js" defer></script>
+  <script type="module" src="js/register-step2.js" defer></script>
 </head>
 <body class="dark:bg-[#1c1c1c] min-h-screen flex items-center justify-center">
     <div class="fixed z-9 top-0 left-0 right-0 bg-light/90 dark:bg-[#1c1c1c] backdrop-blur w-screen h-16 lg:h-20 "></div>
@@ -56,18 +56,6 @@
                     <a href="/register.html">
                         <button class="p-2 text-main dark:text-white border border-main dark:border-white rounded-xl dark:hover:bg-gray-100/10 hover:bg-black/10">Sign up</button>
                     </a>
-                </div>
-                <div id="user-menu" class="hidden relative">
-                    <button id="user-menu-button" class="flex items-center gap-2 px-4 py-2 text-sur hover:text-black dark:hover:text-white">
-                        <span id="user-email-display">User</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2 ">
-            <div class="py-1">
-                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
-                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
-            </div>
-        </div>
                 </div>
                 <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
@@ -100,57 +88,77 @@
         </div>
     </nav>
 
-    <div class="bg-white dark:bg-dark2 p-9 border border-black/20 rounded-4xl shadow-[0px_4px_40px_0px_rgba(0,0,0,0.25)] w-full max-w-md mt-20 flex flex-col gap-10">
+    <div class="bg-white dark:bg-dark3 p-8 rounded-lg shadow-md w-full max-w-md mt-20">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-4xl font-bold text-gray-800 dark:text-white">Creează-ți un cont</h2>
-            
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Finalizare Înregistrare</h2>
+            <div class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                <span class="w-6 h-6 bg-main dark:bg-maindark text-white rounded-full flex items-center justify-center mr-2">1</span>
+                <span class="mr-2">-</span>
+                <span class="w-6 h-6 bg-main dark:bg-maindark text-white rounded-full flex items-center justify-center">2</span>
+            </div>
         </div>
         
-    
-        <form id="signupForm" class="flex flex-col gap-5">
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label for="firstName" class="block text-sm font-medium text-dark dark:text-light mb-1">Prenume</label>
-                    <input type="text" id="firstName" name="firstName" required 
-                        class="w-full px-3 py-2 border border-black/20 dark:border-sur2 rounded-md shadow-sm placeholder-sur2 dark:placeholder-sur focus:outline-none focus:ring-2 focus:ring-main focus:border-main bg-white dark:bg-dark3 text-sur2 dark:text-white"
-                        placeholder="Ion">
-                </div>
-                <div>
-                    <label for="lastName" class="block text-sm font-medium text-dark dark:text-light mb-1">Nume</label>
-                    <input type="text" id="lastName" name="lastName" required 
-                        class="w-full px-3 py-2 border border-black/20 dark:border-sur2 rounded-md shadow-sm placeholder-sur2 dark:placeholder-sur focus:outline-none focus:ring-2 focus:ring-main focus:border-main bg-white dark:bg-dark3 text-sur2 dark:text-white"
-                        placeholder="Popescu">
-                </div>
-            </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
+            Completează informațiile de mai jos pentru a finaliza înregistrarea contului tău.
+        </p>
+        
+        <div class="bg-main/10 dark:bg-maindark/30 p-3 rounded-md mb-6">
+            <p class="text-sm text-main dark:text-maindark">
+                Email: <span id="emailDisplay" class="font-medium"></span>
+            </p>
+        </div>
+        
+        <form id="completeRegForm" class="space-y-6">            
             <div>
-                <label for="email" class="block text-sm font-medium text-dark dark:text-light mb-1">Email</label>
-                <input type="email" id="email" name="email" required 
-                    class="w-full px-3 py-2 border border-black/20 dark:border-sur2 rounded-md shadow-sm placeholder-sur2 dark:placeholder-sur focus:outline-none focus:ring-2 focus:ring-main focus:border-main bg-white dark:bg-dark3 text-sur2 dark:text-white"
-                    placeholder="exemplu@email.com">
+                <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Telefon</label>
+                <input type="tel" id="phone" name="phone" required 
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                    placeholder="+373 60 123 456">
             </div>
             
             <div>
-                <label for="password" class="block text-sm font-medium text-dark dark:text-light mb-1">Parolă</label>
-                <input type="password" id="password" name="password" required
-                    class="w-full px-3 py-2 border border-black/20 dark:border-sur2 rounded-md shadow-sm placeholder-sur2 dark:placeholder-sur focus:outline-none focus:ring-2 focus:ring-main focus:border-main bg-white dark:bg-dark3 text-sur2 dark:text-white"
-                    placeholder="••••••••">
-                <p class="mt-1 text-xs text-gray-500">Parola trebuie să conțină cel puțin 6 caractere</p>
+                <label for="birthDate" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data nașterii</label>
+                <input type="date" id="birthDate" name="birthDate" required
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
             </div>
             
             <div>
-                <button type="submit" id="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-main hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main">
-                    Continuă
+                <label for="occupation" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ocupația</label>
+                <select id="occupation" name="occupation" required
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="" disabled selected>Selectează ocupația</option>
+                    <option value="student">Student</option>
+                    <option value="angajat">Angajat</option>
+                    <option value="freelancer">Freelancer</option>
+                    <option value="somer">Șomer</option>
+                    <option value="pensionar">Pensionar</option>
+                    <option value="altele">Altele</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="education" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Studii</label>
+                <select id="education" name="education" required
+                    class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+                    <option value="" disabled selected>Selectează nivelul de studii</option>
+                    <option value="liceu">Liceu</option>
+                    <option value="licenta">Licență</option>
+                    <option value="master">Master</option>
+                    <option value="doctorat">Doctorat</option>
+                </select>
+            </div>
+            
+            <div class="flex gap-3">
+                <button type="button" id="cancelRegistration" class="w-1/3 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main">
+                    Anulare
+                </button>
+                <button type="submit" class="w-2/3 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-main hover:bg-maindark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-main">
+                    Finalizează înregistrarea
                 </button>
             </div>
         </form>
-        
-        <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-                Ai deja un cont? <a href="login.html" id="loginLink" class="text-main hover:underline">Conectează-te</a>
-            </p>
-        </div>
     </div>
     
-    <script src="js/main.js" type="module"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

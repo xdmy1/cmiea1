@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <style type="text/tailwindcss">
     @custom-variant dark (&:where(.dark, .dark *));
     </style>
@@ -17,11 +18,18 @@
       @theme {
         --color-main: #3542FF;
         --color-sur: #777878;
+        --color-maindark:#4954eb;
+        --color-sur: #777878;
+        --color-sur2: #9B9FA9;
+        --color-dark: #1c1c1c;
+        --color-dark2: #272727;
+        --color-dark3: #3A3A3A;
       }
     </style>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
     import { getAuth } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 </script>
 <script type="module" src="/js/auth-state.js" defer></script>
 </head>
@@ -30,15 +38,16 @@
     <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
 
         
-        <div class="flex items-center justify-between gap-50 ">
+        <div class="flex items-center justify-between ">
 
     <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
             <a href="/index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA  </div></div> </a>
             <div id="burger" class="w-8 lg:hidden "> <img src="assets/burger-alb.svg" class="hidden dark:block" alt="burger"> <img src="assets/burger-negru.svg" class="dark:hidden" alt="burger"></div>
          <ul class="hidden lg:flex flex gap-10 text-sur dark:text-white/50">
              <li><a href="/despre.html">Despre noi</a></li>
-             <li><a href="/cursuri.html">Cursuri</a></li>
+             <li><a href="/cursuri.html" class="text-main font-semibold">Cursuri</a></li>
              <li><a href="/contact.html">Contacte</a></li>
+             <li><a href="/evenimente.html">Evenimente</a></li>
          </ul>
     </div>
 
@@ -57,16 +66,16 @@
             <span id="user-email-display">User</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
-        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+        <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2 ">
             <div class="py-1">
-                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
+                <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
+                <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
             </div>
         </div>
     </div>
     <button id="theme-toggle" type="button" class="ml-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none rounded-lg text-sm p-2.5">
         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
     </button>
 </div>
         </div>
@@ -76,9 +85,9 @@
         <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin">X</div>
         <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
             <a href="/despre.html">Despre noi</a>
-            <a href="/cursuri.html">Cursuri</a>
+            <a href="/cursuri.html" class="text-main font-semibold">Cursuri</a>
             <a href="/contact.html">Contacte</a>
-            
+            <a href="/evenimente.html">Evenimente</a>
             <hr class="border-black my-6 w-3/4 ml-auto">
             <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
                 <a href="login.html" class="w-full text-right">
@@ -101,11 +110,11 @@
     <div>
         <p class="text-3xl lg:text-5xl font-semibold"><span class="text-main dark:text-maindark">Cursurile</span> Noastre</p>
     </div>
-    <div class="mb-5 md:mb-3 p-4 shadow-lg  dark:border-white/50 rounded-lg w-full">
+    <div class="mb-5 md:mb-3 p-4 shadow-lg  dark:border-white/50 rounded-lg w-full dark:bg-dark2">
         <div class="flex flex-col md:flex-row gap-4 justify-between">
             <div class="flex items-center gap-2 justify-between">
                 <label class="text-sur">Categorie:</label>
-                <select id="categoryFilter" class="p-2  rounded-lg">
+                <select id="categoryFilter" class="px-3 py-2  rounded-lg dark:bg-dark2 dark:text-white">
                     <option value="">Toate categoriile</option>
                     <option value="Începător">Începător</option>
                     <option value="Intermediar">Intermediar</option>
@@ -115,7 +124,7 @@
             
             <div class="flex items-center gap-2 justify-between">
                 <label class="text-sur">Durată</label>
-                <select id="durationFilter" class="p-2  rounded-lg">
+                <select id="durationFilter" class="px-3 py-2 rounded-lg dark:bg-dark2 dark:text-white">
                     <option value="">Toate duratele</option>
                     <option value="3 Luni">3 Luni</option>
                     <option value="2 Luni">2 Luni</option>
@@ -125,7 +134,7 @@
             
             <div class="flex items-center gap-2 justify-between">
                 <label class="text-sur">Limbă</label>
-                <select id="languageFilter" class="p-2  rounded-lg">
+                <select id="languageFilter" class="px-3 py-2 rounded-lg dark:bg-dark2 dark:text-white">
                     <option value="">Toate limbile</option>
                     <option value="Română">Română</option>
                     <option value="Engleză">Engleză</option>
@@ -145,7 +154,7 @@
     
 </main>
 
-<footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main rounded-t-4xl text-white">
+<footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main dark:bg-maindark rounded-t-4xl text-white">
     <div class="flex flex-col justify-between gap-10 items-start lg:flex-row py-10">
         <div class="flex flex-col gap-2 max-w-[350px]">
             <a href="index.html"><p class="text-5xl font-bold">CMIEA</p></a>
@@ -186,6 +195,6 @@
 
 
 
-<script src="js/cursuri.js"></script>
+<script type="module" src="js/cursuri.js"></script>
 </body>
 </html>

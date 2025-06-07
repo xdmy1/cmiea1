@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Courses to Firebase</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <h1>Importing Courses to Firebase</h1>
+    <button id="importBtn">Start Import</button>
+    <div id="status"></div>
+
+    <script>
+        // Initialize Firebase with your config
+        firebase.initializeApp({
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        });
+        
+        // Get Firestore instance
+        const db = firebase.firestore();
+        
+        // Import function
+        function importCoursesToFirebase() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = "Starting import...";
+            
+            // Fetch the local JSON file
+            fetch('cursuri.json')
+                .then(response => response.json())
+                .then(courses => {
+                    statusDiv.innerHTML += "<br>Found " + courses.length + " courses to import.";
+                    
+                    // Track completed imports
+                    let completed = 0;
+                    
+                    // Import each course to Firestore
+                    courses.forEach(course => {
+                        // Use the course's id as the document ID
+                        db.collection('courses').doc(course.id.toString()).set(course)
+                            .then(() => {
+                                completed++;
+                                statusDiv.innerHTML += `<br>Course ${course.name} imported successfully! (${completed}/${courses.length})`;
+                                
+                                if (completed === courses.length) {
+                                    statusDiv.innerHTML += "<br><strong>All courses imported successfully!</strong>";
+                                }
+                            })
+                            .catch(error => {
+                                statusDiv.innerHTML += `<br>Error adding course ${course.name}: ${error}`;
+                            });
+                    });
+                })
+                .catch(error => {
+                    statusDiv.innerHTML += "<br>Error loading JSON file: " + error;
+                });
+        }
+        
+        // Add event listener to button
+        document.getElementById('importBtn').addEventListener('click', importCoursesToFirebase);
+    </script>
+</body>
+</html>

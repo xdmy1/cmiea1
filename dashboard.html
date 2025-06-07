@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil - CMIEA</title>
+    <title>Dashboard - CMIEA</title>
     <link rel="icon" href="assets/icon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -13,7 +18,13 @@
                 extend: {
                     colors: {
                         main: '#3542FF',
-                        sur: '#777878'
+                        sur: '#777878',
+                        light: '#f9f9f9',
+                        maindark:'#4954eb',
+                        sur2: '#9B9FA9',
+                        dark: '#1c1c1c',
+                        dark2: '#272727',
+                        dark3: '#3A3A3A'
                     }
                 }
             }
@@ -26,13 +37,66 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <style>
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* Card hover effect */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Custom scrollbar for notifications */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2d2d2d;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3d3d3d;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #4d4d4d;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 dark:bg-[#1c1c1c] min-h-screen">
-    <div class="fixed z-9 top-0 left-0 right-0 backdrop-blur w-screen h-16 lg:h-20"></div>
+    <!-- Keeping the original navigation structure -->
+    <div class="fixed z-9 top-0 left-0 right-0 bg-light/90 dark:bg-[#1c1c1c] backdrop-blur w-screen h-16 lg:h-20"></div>
     <nav class="fixed z-10 top-4 left-4 right-4 lg:top-6 lg:right-32 lg:left-32 xl:left-64 xl:right-64">
-        <div class="flex items-center justify-between gap-50">
+        <div class="flex items-center justify-between ">
             <div class="flex justify-between gap-10 items-center w-full lg:w-auto">
-                <a href="../index.html"><div class="font-semibold text-xl dark:text-white">CMIEA</div></a>
+                <a href="../index.html"><div class="flex items-end gap-1"><img class="w-10" src="assets/icon.png" alt="logo"> <div class="font-semibold text-xl dark:text-white">CMIEA</div></div></a>
                 <div id="burger" class="w-8 lg:hidden z-20">
                     <img src="../assets/burger-alb.svg" class="hidden dark:block" alt="burger">
                     <img src="../assets/burger-negru.svg" class="dark:hidden" alt="burger">
@@ -41,6 +105,7 @@
                     <li><a href="/despre.html">Despre noi</a></li>
                     <li><a href="/cursuri.html">Cursuri</a></li>
                     <li><a href="/contact.html">Contacte</a></li>
+                    <li><a href="/evenimente.html">Evenimente</a></li>
                 </ul>
             </div>
 
@@ -50,10 +115,10 @@
                         <span id="user-email-display">Loading...</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+                    <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-xl bg-white dark:bg-dark2 shadow-xl border border-gray-200 dark:border-dark2 ">
                         <div class="py-1">
-                            <a href="dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Dashboard</a>
-                            <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Logout</button>
+                            <a href="/dashboard.html" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Dashboard</a>
+                            <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-sur dark:hover:bg-dark3">Logout</button>
                         </div>
                     </div>
                 </div>
@@ -64,13 +129,13 @@
             </div>
         </div>
     </nav>
-    <nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen top-0">
-        <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin">X</div>
+    <nav id="phone-nav" class="phone-nav hidden fixed z-11 bg-sur h-screen w-screen lg:hidden">
+        <div id="close" class="text-main dark:text-white absolute right-6 top-6 text-3xl font-thin"><i class="ph ph-x text-5xl"></i></div>
         <div class="h-full w-full text-black bg-white/90 font-thin dark:text-white dark:bg-[#1c1c1c] flex flex-col items-end p-4 justify-center text-4xl gap-5">
             <a href="/despre.html">Despre noi</a>
             <a href="/cursuri.html">Cursuri</a>
             <a href="/contact.html">Contacte</a>
-            
+            <a href="/evenimente.html">Evenimente</a>
             <hr class="border-black my-6 w-3/4 ml-auto dark:border-white">
             <div class="flex gap-1 text-end flex-col text-2xl w-3/4">
                 <a href="login.html" class="w-full text-right">
@@ -87,21 +152,101 @@
         </div>
     </nav>
     
-    <main class="max-w-6xl p-4   lg:px-32 xl:px-64 mt-32 mb-44 px-4 pb-8">
-        <div class="mb-8">
-            <h1 id="greeting" class="text-3xl font-bold text-gray-900 dark:text-white"></h1>
+    <!-- Enhanced Main Content -->
+    <main class="w-full p-4 lg:px-32 xl:px-64 mt-28 lg:mt-32 mb-12">
+        <!-- Welcome Header (Enhanced) -->
+        <div class="bg-white dark:bg-dark2 rounded-xl p-6 mb-8 shadow-md">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div>
+                    <!-- Welcome message (original ID preserved) -->
+                    <h1 id="greeting" class="text-2xl font-bold text-gray-800 dark:text-white mb-2"></h1>
+                    <p class="text-gray-600 dark:text-gray-400">Vizualizează cursurile și evenimentele tale înregistrate</p>
+                </div>
+                <div class="flex items-center mt-4 md:mt-0 gap-4">
+                    <a href="/cursuri.html" class="px-4 py-2 bg-gray-100 dark:bg-dark3 hover:bg-gray-200 dark:hover:bg-dark text-gray-800 dark:text-white rounded-lg transition duration-200 flex items-center gap-2">
+                        <i class="ph ph-books"></i>
+                        <span>Explorează cursuri</span>
+                    </a>
+                    <a href="/evenimente.html" class="px-4 py-2 bg-main hover:bg-maindark dark:bg-maindark text-white rounded-lg transition duration-200 flex items-center gap-2">
+                        <i class="ph ph-calendar-plus"></i>
+                        <span>Evenimente</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <h2 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Cursurile Mele</h2>
-        <div id="enrolledCourses" class="min-h-[200px]">
+
+        <!-- Loading indicator (original ID preserved) -->
+        <div id="loading-indicator" class="flex justify-center items-center py-12">
+            <div class="flex flex-col items-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-main dark:border-maindark"></div>
+                <p class="mt-4 text-gray-600 dark:text-gray-400">Se încarcă datele...</p>
+            </div>
+        </div>
+
+        <!-- Error message (original ID preserved) -->
+        <div id="errorMessage" class="hidden mb-8 p-4 bg-red-100 dark:bg-red-800/30 rounded-lg border border-red-200 dark:border-red-700">
+            <div class="flex items-start">
+                <i class="ph ph-warning-circle text-xl text-red-600 dark:text-red-400 mr-3 mt-0.5"></i>
+                <p class="text-red-700 dark:text-red-300"></p>
+            </div>
+        </div>
+
+        <!-- Notifications section (original style preserved) -->
+        <div id="notifications-container" class="mb-8 hidden">
+            <div class="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
+                <h3 class="text-lg font-semibold text-yellow-800 dark:text-yellow-200 mb-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    Notificări
+                </h3>
+                <div id="upcoming-notifications" class="space-y-3">
+                    <!-- Notifications will be inserted here by dashboard.js -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses section (Enhanced, original IDs preserved) -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
+                    <i class="ph ph-graduation-cap text-main dark:text-maindark mr-2"></i>
+                    Cursurile mele
+                </h2>
+                <a href="/cursuri.html" class="text-main dark:text-maindark hover:underline flex items-center text-sm">
+                    Vezi toate cursurile
+                    <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+            </div>
+            <div id="enrolledCourses" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Course cards will be inserted here by dashboard.js -->
+            </div>
+        </div>
+
+        <!-- Event registrations section (Enhanced, original IDs preserved) -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
+                    <i class="ph ph-calendar-check text-main dark:text-maindark mr-2"></i>
+                    Înregistrările mele la evenimente
+                </h2>
+                <a href="/evenimente.html" class="text-main dark:text-maindark hover:underline flex items-center text-sm">
+                    Vezi toate evenimentele
+                    <i class="ph ph-arrow-right ml-1"></i>
+                </a>
+            </div>
+            <div id="eventRegistrations" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Event registration cards will be inserted here by dashboard.js -->
+            </div>
         </div>
     </main>
 
-
-    <footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main rounded-t-4xl text-white">
+    <!-- Keeping the original footer -->
+    <footer class="p-4 lg:px-32 xl:px-64 mt-24 dark:text-white bg-main dark:bg-maindark rounded-t-4xl text-white">
         <div class="flex flex-col justify-between gap-10 items-start lg:flex-row py-10">
             <div class="flex flex-col gap-2 max-w-[350px]">
                 <a href="index.html"><p class="text-5xl font-bold">CMIEA</p></a>
-                <p>„Sprijinim educația și dezvoltarea adulților prin cursuri gratuite și programe dedicate.”</p>
+                <p>„Sprijinim educația și dezvoltarea adulților prin cursuri gratuite și programe dedicate."</p>
                 <div class="flex gap-5 mt-2">
                     <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/x.png" alt="x"></a>
                     <a href="https://www.facebook.com/profile.php?id=100091913902284"><img class="w-7" src="assets/instagram.png" alt="ig"></a>
@@ -117,7 +262,7 @@
                     <li><a href="#reviews">Evaluare si feedback</a></li>
                 </ul>
                 <ul class="flex flex-col gap-2">
-                    <li><p class="font-bold" >Despre noi</p></li>
+                    <li><p class="font-bold">Despre noi</p></li>
                     <li><a href="/despre.html">Misiunea noastra</a></li>
                     <li><a href="/contact.html">Contact</a></li>
                 </ul>
@@ -135,8 +280,20 @@
         </div>
     </div>
     </footer>
-    <script src="../js/main.js"></script>
+
+    <!-- Basic Firebase initialization -->
+    <script>
+        firebase.initializeApp({
+          apiKey: "AIzaSyBoWwArqP6pYGvVSBzCbUnOphhzk0Pi9oQ",
+          authDomain: "tekwill-441fe.firebaseapp.com",
+          projectId: "tekwill-441fe",
+          storageBucket: "tekwill-441fe.firebasestorage.app",
+          messagingSenderId: "990223834307",
+          appId: "1:990223834307:web:c1a9da67d5e5f070db1676"
+        });
+    </script>
+    <script src="../js/main.js" type="module"></script>
     <script type="module" src="../js/auth-state.js"></script>
-    <script type="module" src="../js/dashboard.js"></script>
+    <script src="../js/dashboard.js"></script>
 </body>
 </html>

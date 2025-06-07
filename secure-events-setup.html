@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Securizat Evenimente - CMIEA</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            margin-bottom: 20px;
+        }
+        .alert {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+        }
+        .warning {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.5);
+        }
+        .info {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+        .button {
+            background: linear-gradient(45deg, #3542FF, #4954eb);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(53, 66, 255, 0.3);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(53, 66, 255, 0.4);
+        }
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .button.danger {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        .log {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            height: 250px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .log-success { color: #4ade80; }
+        .log-error { color: #f87171; }
+        .log-info { color: #60a5fa; }
+        .log-warning { color: #fbbf24; }
+        .auth-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+        }
+        .input {
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+        .input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .user-info {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Setup Securizat Evenimente - CMIEA</h1>
+        
+        <!-- Authentication Section -->
+        <div class="auth-section">
+            <h3>👤 Autentificare Administrator</h3>
+            <div id="auth-content">
+                <p>Pentru a popula evenimentele în Firebase, trebuie să te autentifici ca administrator.</p>
+                
+                <div id="login-section">
+                    <div class="login-form">
+                        <input type="email" id="email" class="input" placeholder="Email administrator" value="">
+                        <input type="password" id="password" class="input" placeholder="Parolă">
+                        <button class="button" onclick="loginAdmin()" id="loginBtn">🔑 Autentificare</button>
+                    </div>
+                </div>
+                
+                <div id="user-section" class="user-info" style="display: none;">
+                    <p>✅ <strong>Autentificat ca:</strong> <span id="userEmail"></span></p>
+                    <p>🔰 <strong>Status:</strong> <span id="userRole">Se verifică...</span></p>
+                    <button class="button danger" onclick="logoutAdmin()">🚪 Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup Section -->
+        <div class="container">
+            <h3>📅 Populare Evenimente</h3>
+            <div id="setup-section" style="opacity: 0.5;">
+                <p>Autentifică-te mai întâi ca administrator pentru a continua.</p>
+                <button class="button" onclick="setupEvents()" id="setupBtn" disabled>
+                    📅 Populează Evenimente în Firebase
+                </button>
+                <button class="button" onclick="viewEvents()" id="viewBtn" disabled>
+                    👀 Vezi Evenimente din Firebase
+                </button>
+                <button class="button danger" onclick="clearEvents()" id="clearBtn" disabled>
+                    🗑️ Șterge Toate Evenimentele
+                </button>
+            </div>
+        </div>
+
+        <div class="log" id="log">
+            <div class="log-info">🔐 Setup Securizat Evenimente - CMIEA</div>
+            <div class="log-warning">Te rog să te autentifici ca administrator pentru a continua...</div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Firebase
+        firebase.initializeApp({
+            apiKey: "AIzaSyBoWwArqP6pYGvVSBzCbUnOphhzk0Pi9oQ",
+            authDomain: "tekwill-441fe.firebaseapp.com",
+            projectId: "tekwill-441fe",
+            storageBucket: "tekwill-441fe.firebasestorage.app",
+            messagingSenderId: "990223834307",
+            appId: "1:990223834307:web:c1a9da67d5e5f070db1676"
+        });
+
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        const logElement = document.getElementById('log');
+
+        let currentUser = null;
+        let isAdmin = false;
+
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            logElement.appendChild(logEntry);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        // Auth state listener
+        auth.onAuthStateChanged(async (user) => {
+            currentUser = user;
+            
+            if (user) {
+                addLog(`✅ Utilizator autentificat: ${user.email}`, 'success');
+                
+                // Check admin status
+                try {
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    if (userDoc.exists && userDoc.data().role === 'admin') {
+                        isAdmin = true;
+                        addLog('🔰 Status: Administrator confirmat!', 'success');
+                        document.getElementById('userRole').textContent = 'Administrator';
+                        document.getElementById('userRole').style.color = '#4ade80';
+                        enableSetupSection();
+                    } else {
+                        isAdmin = false;
+                        addLog('❌ Nu ai permisiuni de administrator!', 'error');
+                        document.getElementById('userRole').textContent = 'Utilizator normal - Nu ai permisiuni';
+                        document.getElementById('userRole').style.color = '#f87171';
+                    }
+                } catch (error) {
+                    addLog(`⚠️ Eroare verificare permisiuni: ${error.message}`, 'warning');
+                    isAdmin = false;
+                }
+                
+                // Update UI
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('user-section').style.display = 'block';
+                document.getElementById('userEmail').textContent = user.email;
+                
+            } else {
+                addLog('👤 Nu ești autentificat', 'warning');
+                isAdmin = false;
+                
+                // Update UI
+                document.getElementById('login-section').style.display = 'block';
+                document.getElementById('user-section').style.display = 'none';
+                disableSetupSection();
+            }
+        });
+
+        async function loginAdmin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+
+            if (!email || !password) {
+                addLog('❌ Te rog să completezi email-ul și parola', 'error');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = '🔄 Se autentifică...';
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                addLog('✅ Autentificare reușită!', 'success');
+            } catch (error) {
+                addLog(`❌ Eroare autentificare: ${error.message}`, 'error');
+                
+                if (error.code === 'auth/user-not-found') {
+                    addLog('💡 Contul nu există. Verifică email-ul.', 'warning');
+                } else if (error.code === 'auth/wrong-password') {
+                    addLog('💡 Parolă incorectă.', 'warning');
+                } else if (error.code === 'auth/invalid-email') {
+                    addLog('💡 Format email invalid.', 'warning');
+                }
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = '🔑 Autentificare';
+            }
+        }
+
+        async function logoutAdmin() {
+            try {
+                await auth.signOut();
+                addLog('👋 Logout reușit', 'info');
+            } catch (error) {
+                addLog(`❌ Eroare logout: ${error.message}`, 'error');
+            }
+        }
+
+        function enableSetupSection() {
+            const setupSection = document.getElementById('setup-section');
+            setupSection.style.opacity = '1';
+            
+            document.getElementById('setupBtn').disabled = false;
+            document.getElementById('viewBtn').disabled = false;
+            document.getElementById('clearBtn').disabled = false;
+            
+            setupSection.querySelector('p').textContent = 'Acum poți popula evenimentele în Firebase cu permisiuni de administrator.';
+        }
+
+        function disableSetupSection() {
+            const setupSection = document.getElementById('setup-section');
+            setupSection.style.opacity = '0.5';
+            
+            document.getElementById('setupBtn').disabled = true;
+            document.getElementById('viewBtn').disabled = true;
+            document.getElementById('clearBtn').disabled = true;
+            
+            setupSection.querySelector('p').textContent = 'Autentifică-te mai întâi ca administrator pentru a continua.';
+        }
+
+        // Sample events data
+        const sampleEvents = [
+            {
+                title: "Ziua Ușilor Deschise",
+                description: "Descoperă oportunități de învățare pentru adulți și află cum te poți dezvolta profesional la Ziua Ușilor Deschise.",
+                category: "Workshop",
+                startDate: "2025-09-27T16:00:00",
+                endDate: "2025-09-27T19:00:00",
+                location: "Centrul CMIEA, Chișinău",
+                facilitator: "Daniela Munca Aftenev",
+                availableSpots: 15,
+                image: "assets/evenimente/ziua-usilor-deschise.jpg",
+                requirements: "Nu sunt necesare cerințe speciale",
+                notes: "Eveniment gratuit cu participare liberă",
+                featured: true
+            },
+            {
+                title: "Workshop Antreprenoriat Digital",
+                description: "Învață să îți dezvolți afacerea online și să folosești instrumentele digitale moderne pentru succesul întreprinderii tale.",
+                category: "Workshop",
+                startDate: "2025-10-15T10:00:00",
+                endDate: "2025-10-15T17:00:00",
+                location: "Online - Zoom",
+                facilitator: "Ion Popescu",
+                availableSpots: 25,
+                image: "assets/evenimente/antreprenoriat-digital.jpg",
+                requirements: "Laptop/PC cu conexiune internet stabilă",
+                notes: "Include materiale de lucru și certificat de participare"
+            },
+            {
+                title: "Seminar Competențe Digitale pentru Seniori",
+                description: "Un seminar dedicat adulților care doresc să învețe să folosească tehnologia modernă în viața de zi cu zi.",
+                category: "Seminar",
+                startDate: "2025-10-22T14:00:00",
+                endDate: "2025-10-22T16:30:00",
+                location: "Biblioteca Municipală, Chișinău",
+                facilitator: "Maria Ionescu",
+                availableSpots: 20,
+                image: "assets/evenimente/competente-digitale-seniori.jpg",
+                requirements: "Vârsta minimă 50 ani",
+                notes: "Materiale tipărite incluse, nu este necesar laptop"
+            },
+            {
+                title: "Conferința Anuală CMIEA 2025",
+                description: "Celebrăm realizările din 2025 și prezentăm planurile pentru viitor. Prezentări de la absolvenți de succes și parteneri.",
+                category: "Conferință",
+                startDate: "2025-11-12T09:00:00",
+                endDate: "2025-11-12T18:00:00",
+                location: "Centrul de Conferințe Moldova, Chișinău",
+                facilitator: "Echipa CMIEA",
+                availableSpots: 150,
+                image: "assets/evenimente/conferinta-anuala.jpg",
+                requirements: "Înregistrare prealabilă obligatorie",
+                notes: "Include coffee break și prânz. Certificat de participare."
+            },
+            {
+                title: "Training Leadership pentru Tineri",
+                description: "Dezvoltă-ți abilitățile de lider și învață să inspiri echipele în acest training intensiv dedicat tinerilor profesioniști.",
+                category: "Training",
+                startDate: "2025-11-25T09:00:00",
+                endDate: "2025-11-26T17:00:00",
+                location: "Centrul CMIEA, Chișinău",
+                facilitator: "Alex Dumitru",
+                availableSpots: 12,
+                image: "assets/evenimente/leadership-tineri.jpg",
+                requirements: "Vârsta 18-35 ani, experiență de lucru în echipă",
+                notes: "Training de 2 zile cu activități practice și certificate internaționale"
+            },
+            {
+                title: "Workshop Fotografie pentru Începători",
+                description: "Descoperă lumea fotografiei și învață tehnicile de bază pentru a face poze impresionante cu orice aparat foto.",
+                category: "Workshop",
+                startDate: "2025-12-03T13:00:00",
+                endDate: "2025-12-03T18:00:00",
+                location: "Parcul Central, Chișinău",
+                facilitator: "Elena Varga",
+                availableSpots: 15,
+                image: "assets/evenimente/workshop-fotografie.jpg",
+                requirements: "Aparat foto (poate fi și telefon cu cameră bună)",
+                notes: "Sesiune practică în aer liber, în caz de vreme rea se mută în interior"
+            },
+            {
+                title: "Seminar Managementul Timpului",
+                description: "Învață să îți organizezi timpul eficient și să crești productivitatea în viața personală și profesională.",
+                category: "Seminar",
+                startDate: "2025-12-10T18:00:00",
+                endDate: "2025-12-10T20:30:00",
+                location: "Online - Zoom",
+                facilitator: "Dr. Mihai Costea",
+                availableSpots: 40,
+                image: "assets/evenimente/management-timp.jpg",
+                requirements: "Notebook pentru notițe",
+                notes: "Include template-uri și instrumente de organizare"
+            },
+            {
+                title: "Training Excel Avansat",
+                description: "Masterclass pentru utilizatorii experimentați de Excel care vor să învețe funcții avansate și automatizări.",
+                category: "Training",
+                startDate: "2025-12-17T09:00:00",
+                endDate: "2025-12-18T16:00:00",
+                location: "Centrul CMIEA, Chișinău",
+                facilitator: "Ana Popovici",
+                availableSpots: 8,
+                image: "assets/evenimente/excel-avansat.jpg",
+                requirements: "Cunoștințe intermediare Excel, laptop propriu cu Excel instalat",
+                notes: "Certificat Microsoft compatibil, materiale de practică incluse"
+            }
+        ];
+
+        async function setupEvents() {
+            if (!isAdmin) {
+                addLog('❌ Nu ai permisiuni de administrator!', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('setupBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Se populează...';
+
+            try {
+                addLog('🚀 Începem popularea evenimentelor în Firebase...', 'info');
+                
+                // Check if events already exist
+                const existingEvents = await db.collection('events').get();
+                if (!existingEvents.empty) {
+                    addLog(`⚠️ Există deja ${existingEvents.size} evenimente în Firebase.`, 'warning');
+                    const confirm = window.confirm('Există deja evenimente în Firebase. Vrei să le ștergi și să adaugi din nou?');
+                    if (!confirm) {
+                        btn.disabled = false;
+                        btn.textContent = '📅 Populează Evenimente în Firebase';
+                        return;
+                    }
+                    await clearEvents(false);
+                }
+
+                let successCount = 0;
+                let errorCount = 0;
+
+                for (const [index, eventData] of sampleEvents.entries()) {
+                    try {
+                        // Add timestamp fields
+                        const eventWithTimestamps = {
+                            ...eventData,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                        };
+
+                        const docRef = await db.collection('events').add(eventWithTimestamps);
+                        addLog(`✅ Eveniment "${eventData.title}" adăugat cu ID: ${docRef.id}`, 'success');
+                        successCount++;
+                    } catch (error) {
+                        addLog(`❌ Eroare la adăugarea "${eventData.title}": ${error.message}`, 'error');
+                        errorCount++;
+                    }
+                }
+
+                addLog(`🎉 Finalizat! ${successCount} evenimente adăugate cu succes, ${errorCount} erori.`, 'success');
+
+            } catch (error) {
+                addLog(`💥 Eroare critică: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '📅 Populează Evenimente în Firebase';
+            }
+        }
+
+        async function viewEvents() {
+            if (!isAdmin) {
+                addLog('❌ Nu ai permisiuni de administrator!', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('viewBtn');
+            btn.disabled = true;
+            btn.textContent = '👀 Se încarcă...';
+
+            try {
+                addLog('📋 Căutam evenimente în Firebase...', 'info');
+                
+                const snapshot = await db.collection('events').orderBy('startDate', 'desc').get();
+                
+                if (snapshot.empty) {
+                    addLog('📭 Nu există evenimente în Firebase.', 'warning');
+                } else {
+                    addLog(`📅 Găsite ${snapshot.size} evenimente:`, 'success');
+                    
+                    snapshot.forEach((doc, index) => {
+                        const event = doc.data();
+                        addLog(`${index + 1}. ${event.title} (${event.category}) - ${event.startDate}`, 'info');
+                    });
+                }
+
+            } catch (error) {
+                addLog(`💥 Eroare la încărcarea evenimentelor: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '👀 Vezi Evenimente din Firebase';
+            }
+        }
+
+        async function clearEvents(showUI = true) {
+            if (!isAdmin) {
+                addLog('❌ Nu ai permisiuni de administrator!', 'error');
+                return;
+            }
+
+            if (showUI) {
+                const btn = document.getElementById('clearBtn');
+                btn.disabled = true;
+                btn.textContent = '🗑️ Se șterge...';
+            }
+
+            try {
+                if (showUI) {
+                    addLog('🧹 Ștergem toate evenimentele din Firebase...', 'warning');
+                }
+                
+                const snapshot = await db.collection('events').get();
+                
+                if (snapshot.empty) {
+                    if (showUI) {
+                        addLog('📭 Nu există evenimente de șters.', 'info');
+                    }
+                    return;
+                }
+
+                const batch = db.batch();
+                snapshot.docs.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+
+                await batch.commit();
+                
+                if (showUI) {
+                    addLog(`🗑️ ${snapshot.size} evenimente au fost șterse cu succes!`, 'success');
+                }
+
+            } catch (error) {
+                addLog(`💥 Eroare la ștergerea evenimentelor: ${error.message}`, 'error');
+            } finally {
+                if (showUI) {
+                    const btn = document.getElementById('clearBtn');
+                    btn.disabled = false;
+                    btn.textContent = '🗑️ Șterge Toate Evenimentele';
+                }
+            }
+        }
+
+        // Auto-populate email for development
+        window.addEventListener('load', () => {
+            addLog('🔐 Setup Securizat Evenimente încărcat!', 'success');
+            addLog('💡 Autentifică-te cu un cont de administrator pentru a continua', 'info');
+            
+            // Pre-fill email if available in localStorage (for development)
+            const savedEmail = localStorage.getItem('admin-email');
+            if (savedEmail) {
+                document.getElementById('email').value = savedEmail;
+                addLog(`💾 Email salvat încărcat: ${savedEmail}`, 'info');
+            }
+        });
+
+        // Save email for future use
+        document.getElementById('email').addEventListener('change', (e) => {
+            localStorage.setItem('admin-email', e.target.value);
+        });
+
+        // Enter key handling
+        document.getElementById('password').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loginAdmin();
+            }
+        });
+    </script>
+</body>
+</html>
